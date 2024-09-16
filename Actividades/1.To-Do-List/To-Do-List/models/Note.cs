@@ -17,15 +17,25 @@ namespace ToDoApi.Models
             _id = 0;
             _title = "";
             _description = "";
-            _status = Status.Pending;
+            _status = StatusNote.Pending;
             _due_date = null;
             _created_at = DateTime.Now;
             _updated_at = DateTime.Now;
             _completed_at = null;
-            _deleted = "";
+            _deleted = false;
         }
 
-        public Note(id, title, description, status, due_date, created_at, updated_at, completed_at, deleted)
+        public Note(
+            int id,
+            string title,
+            string? description,
+            StatusNote status,
+            DateTime due_date,
+            DateTime created_at,
+            DateTime updated_at,
+            DateTime completed_at,
+            bool deleted
+        )
         {
             _id = id;
             _title = title;
@@ -38,71 +48,71 @@ namespace ToDoApi.Models
             _deleted = deleted;
         }
 
-        public Id()
+        public int Id
         {
-            get{return id;}
-            set{id = value;}
+            get { return _id; }
+            set { _id = value; }
         }
 
-        public Title()
+        public string Title
         {
-            get{return title;}
-            set{title = value;}
+            get { return _title; }
+            set { _title = value; }
         }
 
-        public Description()
+        public string? Description
         {
-            get{return description;}
-            set{description = value;}
+            get { return _description; }
+            set { _description = value; }
         }
 
-        public Status()
+        public StatusNote Status
         {
-            get{return status;}
-            set{status = value;}
+            get{ return _status; }
+            set { _status = value; }
         }
 
-        public Due_date()
+        public DateTime? Due_date
         {
-            get{return due_date;}
-            set{due_date = value;}
+            get { return _due_date; }
+            set { _due_date = value; }
         }
 
-        public Created_at()
+        public DateTime Created_at
         {
-            get{return created_at;}
-            set{created_at = value;}
+            get { return _created_at; }
+            set { _created_at = value; }
         }
 
-        public Updated_at()
+        public DateTime Updated_at
         {
-            get{return updated_at;}
-            set{updated_at = value;}
+            get { return _updated_at; }
+            set { _updated_at = value; }
         }
 
-        public Completed_at()
+        public DateTime? Completed_at
         {
-            get{return completed_at;}
-            set{completed_at = value;}
+            get { return _completed_at; }
+            set { _completed_at = value; }
         }
 
-        public Deleted()
+        public bool Deleted
         {
-            get{return deleted;}
-            set{deleted = value;}
+            get { return _deleted; }
+            set { _deleted = value; }
         }
 
         // Métodos para manipular los datos
         public void MarkAsCompleted()
         {
-            _status = TaskStatus.Completed;
-            _completedAt = DateTime.Now;
+            _status = StatusNote.Completed;
+            _completed_at = DateTime.Now;
         }
 
-        public void UpdateStatus(string newStatus)
+        public void UpdateStatus(StatusNote newStatus)
         {
             _status = newStatus;
-            _updatedAt = DateTime.Now;
+            _updated_at = DateTime.Now;
         }
 
     }
