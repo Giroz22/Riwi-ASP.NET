@@ -1,30 +1,28 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ToDoApi.Data;
 using ToDoApi.Models;
 
 [ApiController]
 [Route("api/[controller]")]
 public class NoteController : ControllerBase
 {
-    private readonly BaseContext _context;
+    private readonly INoteService _noteService;
 
-    public NoteController(BaseContext context)
+    public NoteController(INoteService noteService)
     {
-        _context = context;
+        _noteService = noteService;
     }
 
     //Get Notes
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Note>>> FindAll()
     {        
-        return await _context.Notes.ToListAsync();
+        return Ok(await _noteService.GetAll());
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<Note>> FindById(int id)
     {
-        var user = await _context.Notes.FindAsync(id);
+        var user = await _noteService.GetById(id);
 
         if(user == null)
         {
@@ -36,11 +34,10 @@ public class NoteController : ControllerBase
 
     [HttpPost]
     public async Task<ActionResult<Note>> Create(Note note)
-    {
-        _context.Notes.Add(note);
-        await _context.SaveChangesAsync();
+    {        
+        var noteCreated = await _noteService.Create(note);
 
-        return CreatedAtAction("FindById", new { id = note.Id }, note);
+        return CreatedAtAction("FindById", new { id = noteCreated.Id }, noteCreated);
     }
 
     [HttpPut("{id}")]
@@ -48,26 +45,13 @@ public class NoteController : ControllerBase
     {
         if(id != newNote.Id) return BadRequest();        
 
-        var note = await _context.Notes.FindAsync(id);
-        if(note == null) return NotFound();
-
-        _context.Entry(note).CurrentValues.SetValues(newNote);
-        await _context.SaveChangesAsync();
-
-        return Ok(note);
+        return Ok(await _noteService.Update(id, newNote));
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var note = await _context.Notes.FindAsync(id);
-        if(note == null)
-        {
-            return NotFound();
-        }
-
-        note.Deleted = true;
-        await _context.SaveChangesAsync();
+        await _noteService.Delete(id);
 
         return NoContent();
     }
