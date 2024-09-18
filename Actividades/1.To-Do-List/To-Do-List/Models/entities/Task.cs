@@ -1,35 +1,35 @@
 namespace ToDoApi.Models
 {
-    public class Note
+    public class TaskEntity
     {
         private int _id;
         private string _title;
         private string? _description;
-        private StatusNote _status;
+        private StatusTask _status;
         private DateTime? _due_date;
-        private DateTime _created_at;
-        private DateTime _updated_at;
+        private DateTime? _created_at;
+        private DateTime? _updated_at;
         private DateTime? _completed_at;
         private bool _deleted;
 
-        public Note()
+        public TaskEntity()
         {
             _id = 0;
             _title = "";
             _description = "";
-            _status = StatusNote.Pending;
+            _status = StatusTask.Pending;
             _due_date = null;
-            _created_at = DateTime.Now;
-            _updated_at = DateTime.Now;
+            _created_at = null;
+            _updated_at = null;
             _completed_at = null;
             _deleted = false;
         }
 
-        public Note(
+        public TaskEntity(
             int id,
             string title,
             string? description,
-            StatusNote status,
+            StatusTask status,
             DateTime due_date,
             DateTime created_at,
             DateTime updated_at,
@@ -66,7 +66,7 @@ namespace ToDoApi.Models
             set { _description = value; }
         }
 
-        public StatusNote Status
+        public StatusTask Status
         {
             get{ return _status; }
             set { _status = value; }
@@ -78,13 +78,13 @@ namespace ToDoApi.Models
             set { _due_date = value; }
         }
 
-        public DateTime Created_at
+        public DateTime? Created_at
         {
             get { return _created_at; }
             set { _created_at = value; }
         }
 
-        public DateTime Updated_at
+        public DateTime? Updated_at
         {
             get { return _updated_at; }
             set { _updated_at = value; }
@@ -105,11 +105,11 @@ namespace ToDoApi.Models
         // Métodos para manipular los datos
         public void MarkAsCompleted()
         {
-            _status = StatusNote.Completed;
+            _status = StatusTask.Completed;
             _completed_at = DateTime.Now;
         }
 
-        public void UpdateStatus(StatusNote newStatus)
+        public void UpdateStatus(StatusTask newStatus)
         {
             _status = newStatus;
             _updated_at = DateTime.Now;

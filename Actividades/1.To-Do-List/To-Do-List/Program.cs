@@ -4,7 +4,7 @@ using ToDoApi.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddScoped<INoteService, NoteService>();
+builder.Services.AddScoped<ITaskService, TaskService>();
 
 // Agregar la conexión a MySQL
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -16,6 +16,9 @@ builder.Services.AddDbContext<BaseContext>(options =>
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//Mapper
+builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
 
