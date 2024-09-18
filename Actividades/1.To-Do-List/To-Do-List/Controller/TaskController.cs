@@ -59,4 +59,45 @@ public class TaskController : ControllerBase
         return NoContent();
     }
 
+    [HttpGet("{id}/pending")]
+    public async Task<ActionResult<TaskResponse>> SetToPending(int id)
+    {
+        try
+        {
+            return Ok(await _TaskService.SetTaskToPending(id));
+        }
+        catch(Exception ex)
+        {
+            return NotFound(new { message = ex.Message });
+        }
+        
+    }
+
+    [HttpGet("{id}/inprogress")]
+    public async Task<ActionResult<TaskResponse>> SetToInProgress(int id)
+    {
+        try
+        {
+            return Ok(await _TaskService.SetTaskToInProgress(id));
+        }
+        catch(Exception ex)
+        {
+            return NotFound(new { message = ex.Message });
+        }
+        
+    }
+
+    [HttpGet("{id}/complete")]
+    public async Task<ActionResult<TaskResponse>> CompleteTask(int id)
+    {
+        try
+        {
+            return Ok(await _TaskService.MarkAsCompleted(id));
+        }
+        catch(Exception ex)
+        {
+            return NotFound(new { message = ex.Message });
+        }        
+    }
+
 }

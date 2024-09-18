@@ -91,7 +91,5 @@ namespace ToDoApi.dtos.response
             get { return _completed_at; }
             set { _completed_at = value; }
         }
-
-    }
-    
+    }    
 }

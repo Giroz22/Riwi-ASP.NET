@@ -29,7 +29,7 @@ namespace ToDoApi.Services
 
         public async Task<TaskResponse?> GetById(int id)
         {
-            var task = await _context.Tasks.FindAsync(id);
+            var task = await find(id);
 
             return _mapper.Map<TaskResponse>(task);
         }
@@ -48,9 +48,7 @@ namespace ToDoApi.Services
 
         public async Task<TaskResponse> Update(int id, TaskRequest request)
         {
-            var task = await _context.Tasks.FindAsync(id);
-
-            if(task == null) throw new Exception("Product not found");
+            var task = await find(id);
 
             _mapper.Map(request, task);
 
@@ -64,12 +62,49 @@ namespace ToDoApi.Services
 
         public async Task Delete(int id)
         {
+            var task = await find(id);            
+            task.Deleted = true;
+            await _context.SaveChangesAsync();                
+        }
+
+        public async Task<TaskResponse> SetTaskToPending(int id)
+        {
+            TaskEntity task = await find(id);
+            UpdateStatus(task, StatusTask.Pending);
+
+            await _context.SaveChangesAsync();
+
+            return _mapper.Map<TaskResponse>(task);
+        }
+
+        public async Task<TaskResponse> SetTaskToInProgress(int id)
+        {
+            TaskEntity task = await find(id);
+            UpdateStatus(task, StatusTask.InProgress);
+
+            await _context.SaveChangesAsync();
+
+            return _mapper.Map<TaskResponse>(task);
+        }
+
+        public async Task<TaskResponse> MarkAsCompleted(int id)
+        {
+            TaskEntity task = await find(id);
+            UpdateStatus(task, StatusTask.Completed);
+            task.Completed_at = DateTime.Now;
+
+            await _context.SaveChangesAsync();
+
+            return _mapper.Map<TaskResponse>(task);
+        }
+
+        private async Task<TaskEntity> find(int id)
+        {
             var task = await _context.Tasks.FindAsync(id);
-            if(task != null)
-            {
-                task.Deleted = true;
-                await _context.SaveChangesAsync();
-            }        
+
+            if(task == null) throw new Exception("Product not found");
+
+            return task;
         }
 
         // Métodos para manipular los datos
@@ -84,12 +119,6 @@ namespace ToDoApi.Services
         private void AssignDefaultUpdateData(TaskEntity task)
         {
             task.Updated_at = DateTime.Now;
-        }
-
-        private void MarkAsCompleted(TaskEntity task)
-        {
-            task.Status = StatusTask.Completed;
-            task.Completed_at = DateTime.Now;
         }
 
         private void UpdateStatus(TaskEntity task, StatusTask newStatus)
