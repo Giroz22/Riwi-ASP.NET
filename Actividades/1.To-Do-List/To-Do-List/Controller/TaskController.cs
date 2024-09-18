@@ -41,7 +41,14 @@ public class TaskController : ControllerBase
     [HttpPut("{id}")]
     public async Task<ActionResult<TaskResponse>> Update(int id, [FromBody] TaskRequest requets)
     {     
-        return Ok(await _TaskService.Update(id, requets));
+        try
+        {
+            return Ok(await _TaskService.Update(id, requets));
+        }
+        catch(Exception ex)
+        {
+            return NotFound(new { message = ex.Message });
+        }
     }
 
     [HttpDelete("{id}")]

@@ -5,7 +5,7 @@ namespace ToDoApi.dtos.response
         private int _id;
         private string _title;
         private string? _description;
-        private StatusTask _status;
+        private string _status;
         private DateTime? _due_date;
         private DateTime _created_at;
         private DateTime _updated_at;
@@ -16,7 +16,7 @@ namespace ToDoApi.dtos.response
             _id = 0;
             _title = "";
             _description = "";
-            _status = StatusTask.Pending;
+            _status = "";
             _due_date = null;
             _created_at = DateTime.Now;
             _updated_at = DateTime.Now;
@@ -27,7 +27,7 @@ namespace ToDoApi.dtos.response
             int id,
             string title,
             string? description,
-            StatusTask status,
+            string status,
             DateTime due_date,
             DateTime created_at,
             DateTime updated_at,
@@ -62,7 +62,7 @@ namespace ToDoApi.dtos.response
             set { _description = value; }
         }
 
-        public StatusTask Status
+        public string Status
         {
             get{ return _status; }
             set { _status = value; }

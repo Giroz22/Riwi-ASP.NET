@@ -100,20 +100,6 @@ namespace ToDoApi.Models
         {
             get { return _deleted; }
             set { _deleted = value; }
-        }
-
-        // Métodos para manipular los datos
-        public void MarkAsCompleted()
-        {
-            _status = StatusTask.Completed;
-            _completed_at = DateTime.Now;
-        }
-
-        public void UpdateStatus(StatusTask newStatus)
-        {
-            _status = newStatus;
-            _updated_at = DateTime.Now;
-        }
-
+        }    
     }
 }
