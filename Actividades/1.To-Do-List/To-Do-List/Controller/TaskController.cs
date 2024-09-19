@@ -3,7 +3,7 @@ using ToDoApi.dtos.request;
 using ToDoApi.dtos.response;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/tasks")]
 public class TaskController : ControllerBase
 {
     private readonly ITaskService _TaskService;
@@ -32,7 +32,7 @@ public class TaskController : ControllerBase
 
     [HttpPost]
     public async Task<ActionResult<TaskResponse>> Create([FromBody] TaskRequest request)
-    {        
+    {           
         var TaskCreated = await _TaskService.Create(request);
 
         return CreatedAtAction("FindById", new { id = TaskCreated.Id }, TaskCreated);
@@ -42,7 +42,7 @@ public class TaskController : ControllerBase
     public async Task<ActionResult<TaskResponse>> Update(int id, [FromBody] TaskRequest requets)
     {     
         try
-        {
+        {                    
             return Ok(await _TaskService.Update(id, requets));
         }
         catch(Exception ex)
