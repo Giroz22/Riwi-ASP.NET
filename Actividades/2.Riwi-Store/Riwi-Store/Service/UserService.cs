@@ -20,7 +20,7 @@ namespace RiwiStore.Services
 
         public async Task<IEnumerable<UserResponse>> GetAll()
         {
-            var Users = await _context.Users.ToListAsync();
+            var Users = await _context.Users.Include(u=>u.Orders).ThenInclude(o=>o.Product).ToListAsync();
 
             return _mapper.Map<IEnumerable<UserResponse>>(Users);
         }
@@ -63,11 +63,15 @@ namespace RiwiStore.Services
 
         private async Task<UserEntity> find(int id)
         {
-            var order = await _context.Users.FindAsync(id);
+            var user = await _context.Users
+                                        .Include(u => u.Orders)   
+                                        .ThenInclude(o=>o.Product) 
+                                        .FirstOrDefaultAsync(u => u.Id == id);
 
-            if(order == null) throw new Exception("User not found");
+            if(user == null) throw new Exception("User not found");
 
-            return order;
+
+            return user;
         }
     }
 }

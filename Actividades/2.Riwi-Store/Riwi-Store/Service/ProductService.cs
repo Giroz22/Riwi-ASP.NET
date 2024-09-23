@@ -20,9 +20,9 @@ namespace RiwiStore.Services
 
         public async Task<IEnumerable<ProductResponse>> GetAll()
         {
-            var Products = await _context.Products.ToListAsync();
+            var products = await _context.Products.Include(p=>p.Orders).ThenInclude(o=>o.User).ToListAsync();
 
-            return _mapper.Map<IEnumerable<ProductResponse>>(Products);
+            return _mapper.Map<IEnumerable<ProductResponse>>(products);
         }
 
         public async Task<ProductResponse> GetById(int id)
@@ -63,11 +63,14 @@ namespace RiwiStore.Services
 
         private async Task<ProductEntity> find(int id)
         {
-            var order = await _context.Products.FindAsync(id);
+            var product = await _context.Products
+                                        .Include(p => p.Orders)
+                                        .ThenInclude(o=>o.User)
+                                        .FirstOrDefaultAsync(p => p.Id == id);
+                                        
+            if(product == null) throw new Exception("Product not found");
 
-            if(order == null) throw new Exception("Product not found");
-
-            return order;
+            return product;
         }
     }
 }

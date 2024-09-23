@@ -1,6 +1,9 @@
 namespace RiwiStore.DTO
 {
-    public class UserRequest : UserDTO
+    public class UserRequest
     {
+        public string? Names { set; get; }
+        public string? LastNames { set; get; }
+        public string? Email { set; get; }
     }
 }

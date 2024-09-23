@@ -24,7 +24,7 @@ namespace RiwiStore.Services
                                .Include(o => o.Product) 
                                .Include(o => o.User)    
                                .ToListAsync();
-
+        
             return _mapper.Map<IEnumerable<OrderResponse>>(Orders);
         }
 
