@@ -6,10 +6,10 @@ namespace RiwiStore.Model
 
         //Product
         public int ProductId { set; get; }
-        public ProductEntity? Product { set; get; }
+        public required ProductEntity Product { set; get; }
 
         //User
         public int UserId { set;  get; }
-        public UserEntity? User { set; get; } 
+        public required UserEntity User { set; get; } 
     }
 }

@@ -1,25 +1,32 @@
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using RiwiStore.Data;
+using RiwiStore.DTO;
 using RiwiStore.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-// 1.DbContext
+// DbContext
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<BaseContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
-// 2. Add services
+// Add services
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
-//3.Mapper
+// Fluent validation
+builder.Services.AddMvc();
+builder.Services.AddScoped<IValidator<ProductRequest>, ProductValidator>();
+builder.Services.AddScoped<IValidator<UserRequest>, UserValidator>();
+
+// Mapper
 builder.Services.AddAutoMapper(typeof(Program));
 
-//4. Add services to controllers
+// Add services to controllers
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
         options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles  //avoid reference cycles

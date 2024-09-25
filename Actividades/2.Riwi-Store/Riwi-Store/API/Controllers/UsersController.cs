@@ -1,3 +1,5 @@
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using RiwiStore.DTO;
 
@@ -6,10 +8,12 @@ using RiwiStore.DTO;
 public class UsersController : ControllerBase
 {
     private readonly IUserService _UserService;
+    private readonly IValidator<UserRequest> _validator;
 
-    public UsersController(IUserService UserService)
+    public UsersController(IUserService UserService, IValidator<UserRequest> validator)
     {
         _UserService = UserService;
+        _validator = validator;
     }
 
     //Get Tasks
@@ -32,17 +36,29 @@ public class UsersController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<UserResponse>> Create([FromBody] UserRequest request)
     {           
+        ValidationResult result = await _validator.ValidateAsync(request);
+        if(!result.IsValid){
+            result.AddToModelState(ModelState);
+            return BadRequest(ModelState);
+        } 
+
         var TaskCreated = await _UserService.Create(request);
 
         return CreatedAtAction("FindById", new { id = TaskCreated.Id }, TaskCreated);
     }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult<UserResponse>> Update(int id, [FromBody] UserRequest requets)
+    public async Task<ActionResult<UserResponse>> Update(int id, [FromBody] UserRequest request)
     {     
         try
         {                    
-            return Ok(await _UserService.Update(id, requets));
+            ValidationResult result = await _validator.ValidateAsync(request);
+            if(!result.IsValid){
+                result.AddToModelState(ModelState);
+                return BadRequest(ModelState);
+            } 
+                     
+            return Ok(await _UserService.Update(id, request));
         }
         catch(Exception ex)
         {
