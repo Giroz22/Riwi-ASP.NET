@@ -20,14 +20,14 @@ namespace RiwiStore.Services
 
         public async Task<IEnumerable<ProductResponse>> GetAll()
         {
-            var products = await _context.Products.Include(p=>p.Orders).ThenInclude(o=>o.User).ToListAsync();
+            var products = await _context.Products.Include(p=>p.Orders).ThenInclude(o=>o.Purchase).ThenInclude(pur=>pur.User).ToListAsync();
 
             return _mapper.Map<IEnumerable<ProductResponse>>(products);
         }
 
         public async Task<ProductResponse> GetById(int id)
         {
-            var order = await find(id);
+            var order = await Find(_context, id);
 
             return _mapper.Map<ProductResponse>(order);
         }
@@ -44,7 +44,7 @@ namespace RiwiStore.Services
 
         public async Task<ProductResponse> Update(int id, ProductRequest request)
         {
-            var order = await find(id);
+            var order = await Find(_context, id);
 
             _mapper.Map(request, order);
 
@@ -56,16 +56,17 @@ namespace RiwiStore.Services
 
         public async Task Delete(int id)
         {
-            var order = await find(id);       
+            var order = await Find(_context, id);       
             _context.Products.Remove(order);
             await _context.SaveChangesAsync();                
         }
 
-        private async Task<ProductEntity> find(int id)
+        public static async Task<ProductEntity> Find(BaseContext context, int id)
         {
-            var product = await _context.Products
+            var product = await context.Products
                                         .Include(p => p.Orders)
-                                        .ThenInclude(o=>o.User)
+                                        .ThenInclude(o=>o.Purchase)
+                                        .ThenInclude(pur=>pur.User)
                                         .FirstOrDefaultAsync(p => p.Id == id);
                                         
             if(product == null) throw new Exception("Product not found");

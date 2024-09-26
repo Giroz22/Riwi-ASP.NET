@@ -12,24 +12,31 @@ namespace RiwiStore.Data
         public DbSet<OrderEntity> Orders {get; set;}
         public DbSet<ProductEntity> Products {get; set;}
         public DbSet<UserEntity> Users {get; set;}
+        public DbSet<PurchaseEntity> Purchases { get; set; }        
 
         //Relations
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            //User to Order
+            //User to Purchase
             modelBuilder.Entity<UserEntity>()
-                .HasMany(u=>u.Orders)
-                .WithOne(o=>o.User)
-                .HasForeignKey(o=>o.UserId);
+                .HasMany(user=>user.Purchases)
+                .WithOne(pur=>pur.User)
+                .HasForeignKey(pur=>pur.UserId);
 
-            //Product to Order
+            //Purchase to order
+            modelBuilder.Entity<PurchaseEntity>()
+                .HasMany(pur=>pur.Orders)
+                .WithOne(ord=>ord.Purchase)
+                .HasForeignKey(ord=>ord.PurchaseId);
+
+            //Product to product
             modelBuilder.Entity<ProductEntity>()
-                .HasMany(p=>p.Orders)
-                .WithOne(o=>o.Product)
-                .HasForeignKey(o=>o.ProductId);
-            
+                .HasMany(prod=>prod.Orders)
+                .WithOne(ord=>ord.Product)
+                .HasForeignKey(ord=>ord.ProductId)
+                .OnDelete(DeleteBehavior.SetNull); 
         }
     }
 }

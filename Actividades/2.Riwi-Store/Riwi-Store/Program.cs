@@ -14,9 +14,10 @@ builder.Services.AddDbContext<BaseContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 // Add services
-builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IPurchaseService, PurchaseService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 // Fluent validation
 builder.Services.AddMvc();

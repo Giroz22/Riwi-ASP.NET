@@ -5,7 +5,7 @@ namespace RiwiStore.Model
         public int Id { set; get; }
         public string Name { set; get; } = "";
         public string? Description { set; get; }
-        public decimal Price { set; get; }
+        public double Price { set; get; } = 0;
         public IEnumerable<OrderEntity> Orders { set; get; } = new List<OrderEntity>();
     }
 }

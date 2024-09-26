@@ -1,11 +1,7 @@
 using RiwiStore.DTO;
+using RiwiStore.Model;
 
-public interface IOrderService : 
-    IGetAll<OrderResponse>,
-    IGetById<int, OrderResponse>,
-    ICreate<OrderRequest, OrderResponse>,
-    IUpdate<int, OrderRequest,OrderResponse>,
-    IDelete<int>
+public interface IOrderService
 {
-    
+    Task<OrderEntity> CalculateSubTotal(OrderEntity order);
 }

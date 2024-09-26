@@ -6,6 +6,6 @@ namespace RiwiStore.Model
         public string Names { set; get; } = "";
         public string? LastNames { set; get; }
         public string Email { set; get; } = "";
-        public IEnumerable<OrderEntity> Orders { set; get; } = new List<OrderEntity>();
+        public IEnumerable<PurchaseEntity> Purchases { set; get; } = new List<PurchaseEntity>();
     }    
 }

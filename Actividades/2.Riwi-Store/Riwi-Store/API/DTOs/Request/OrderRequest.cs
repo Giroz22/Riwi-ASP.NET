@@ -2,9 +2,7 @@ namespace RiwiStore.DTO
 {
     public class OrderRequest
     {
-        //User
-        public int UserId { set;  get; }
-        //Product
         public int ProductId {set; get;}
+        public int numProducts { set; get; }
     }
 }

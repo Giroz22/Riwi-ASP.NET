@@ -4,10 +4,10 @@ namespace RiwiStore.DTO
     {
         public int Id { set; get; }
 
+        public int numProducts { set; get; }
+        public double subTotal { set; get; }
+
         //Product
         public ProductDTO? Product {set; get;}
-
-        //User
-        public UserDTO? User { set;  get; }
     }
 }

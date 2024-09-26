@@ -2,6 +2,6 @@ namespace RiwiStore.DTO
 {
     public class UserResponse : UserDTO
     {
-        public  IEnumerable<OrderToUserResponse>? Orders { set; get; }
+        public  IEnumerable<PurchaseToUserReponse>? Purchases { set; get; }
     }
 }
