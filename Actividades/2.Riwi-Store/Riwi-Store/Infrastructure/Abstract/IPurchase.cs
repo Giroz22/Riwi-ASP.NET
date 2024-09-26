@@ -1,5 +1,5 @@
 
-using RiwiStore.DTO;
+using RiwiStore.API.DTOs;
 
 public interface IPurchaseService :
     IGetAll<PurchaseResponse>,

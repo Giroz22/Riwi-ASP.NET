@@ -1,13 +1,16 @@
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-public static class Extensions 
+namespace RiwiStore.Util.Extensions
 {
-  public static void AddToModelState(this ValidationResult result, ModelStateDictionary modelState) 
+  public static class Extensions 
   {
-    foreach (var error in result.Errors) 
+    public static void AddToModelState(this ValidationResult result, ModelStateDictionary modelState) 
     {
-      modelState.AddModelError(error.PropertyName, error.ErrorMessage);
+      foreach (var error in result.Errors) 
+      {
+        modelState.AddModelError(error.PropertyName, error.ErrorMessage);
+      }
     }
   }
 }

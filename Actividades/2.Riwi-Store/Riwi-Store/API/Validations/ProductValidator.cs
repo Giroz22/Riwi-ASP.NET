@@ -1,15 +1,18 @@
 using FluentValidation;
-using RiwiStore.DTO;
+using RiwiStore.API.DTOs;
 
-public class ProductValidator : AbstractValidator<ProductRequest>
-{
-    public ProductValidator()
+namespace RiwiStore.API.Validations
+{    
+    public class ProductValidator : AbstractValidator<ProductRequest>
     {
-        RuleFor(p => p.Name)
-            .NotEmpty().WithMessage("The name is required");
+        public ProductValidator()
+        {
+            RuleFor(p => p.Name)
+                .NotEmpty().WithMessage("The name is required");
 
-        RuleFor(p=>p.Price)
-            .NotNull().WithMessage("Price is required")
-            .GreaterThanOrEqualTo(0).WithMessage("Price must be greater than or equal to 0");
+            RuleFor(p=>p.Price)
+                .NotNull().WithMessage("Price is required")
+                .GreaterThanOrEqualTo(0).WithMessage("Price must be greater than or equal to 0");
+        }
     }
 }

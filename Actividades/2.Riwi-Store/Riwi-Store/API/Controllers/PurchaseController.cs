@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using RiwiStore.DTO;
+using RiwiStore.API.DTOs;
 
 [ApiController]
 [Route("api/purchases")]
@@ -56,9 +56,13 @@ public class PurchasesController : ControllerBase
     ///     POST /api/purchases
     ///     
     ///     {
+    ///      "userId": 1,
+    ///      "orders": [
+    ///        {
     ///         "productId": 1,
-    ///         "userId": 1,
-    ///         "quantity": 2
+    ///         "numProducts": 4
+    ///        }
+    ///      ]
     ///     }
     /// </remarks>
     [HttpPost]
@@ -83,9 +87,13 @@ public class PurchasesController : ControllerBase
     ///     PUT /api/purchases/1
     ///     
     ///     {
+    ///      "userId": 1,
+    ///      "orders": [
+    ///        {
     ///         "productId": 1,
-    ///         "userId": 1,
-    ///         "quantity": 3
+    ///         "numProducts": 2
+    ///        }
+    ///      ]
     ///     }
     /// </remarks>
     [HttpPut("{id}")]

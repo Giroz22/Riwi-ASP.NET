@@ -1,6 +1,6 @@
 using AutoMapper;
-using RiwiStore.DTO;
-using RiwiStore.Model;
+using RiwiStore.API.DTOs;
+using RiwiStore.Domain.Entities;
 
 class MappingProfile : Profile
 {

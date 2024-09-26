@@ -2,9 +2,10 @@ using System.Reflection;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using RiwiStore.Data;
-using RiwiStore.DTO;
-using RiwiStore.Services;
+using RiwiStore.API.DTOs;
+using RiwiStore.API.Validations;
+using RiwiStore.Domain.Data;
+using RiwiStore.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

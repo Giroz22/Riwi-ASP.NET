@@ -1,15 +1,18 @@
 using FluentValidation;
-using RiwiStore.DTO;
+using RiwiStore.API.DTOs;
 
-public class UserValidator : AbstractValidator<UserRequest>
+namespace RiwiStore.API.Validations
 {
-    public UserValidator()
+    public class UserValidator : AbstractValidator<UserRequest>
     {
-        RuleFor(u => u.Names)
-            .NotEmpty().WithMessage("The Name is required");
+        public UserValidator()
+        {
+            RuleFor(u => u.Names)
+                .NotEmpty().WithMessage("The Name is required");
 
-        RuleFor(u=>u.Email)
-            .NotEmpty().WithMessage("The email is required")
-            .EmailAddress().WithMessage("The email format is invalid");
+            RuleFor(u=>u.Email)
+                .NotEmpty().WithMessage("The email is required")
+                .EmailAddress().WithMessage("The email format is invalid");
+        }
     }
 }

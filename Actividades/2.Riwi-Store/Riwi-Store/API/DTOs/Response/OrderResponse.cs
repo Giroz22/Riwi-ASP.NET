@@ -1,4 +1,4 @@
-namespace RiwiStore.DTO
+namespace RiwiStore.API.DTOs
 {
     public class OrderResponse
     {

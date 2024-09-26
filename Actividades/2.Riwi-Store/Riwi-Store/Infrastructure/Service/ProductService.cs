@@ -1,10 +1,11 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using RiwiStore.Data;
-using RiwiStore.DTO;
-using RiwiStore.Model;
+using RiwiStore.API.DTOs;
+using RiwiStore.Domain.Data;
+using RiwiStore.Domain.Entities;
 
-namespace RiwiStore.Services
+
+namespace RiwiStore.Infrastructure.Services
 {
     class ProductService : IProductService
     {

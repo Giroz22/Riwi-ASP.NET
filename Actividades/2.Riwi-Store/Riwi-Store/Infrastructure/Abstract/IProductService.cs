@@ -1,4 +1,4 @@
-using RiwiStore.DTO;
+using RiwiStore.API.DTOs;
 
 public interface IProductService :
     IGetAll<ProductResponse>,

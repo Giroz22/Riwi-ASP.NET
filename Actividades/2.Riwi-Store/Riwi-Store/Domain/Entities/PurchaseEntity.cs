@@ -1,6 +1,6 @@
-using RiwiStore.DTO;
+using RiwiStore.API.DTOs;
 
-namespace RiwiStore.Model
+namespace RiwiStore.Domain.Entities
 {
     public class PurchaseEntity
     {

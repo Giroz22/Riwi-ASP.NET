@@ -1,4 +1,4 @@
-namespace RiwiStore.Model
+namespace RiwiStore.Domain.Entities
 {
     public class ProductEntity
     {

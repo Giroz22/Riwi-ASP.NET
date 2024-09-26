@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using RiwiStore.Model;
+using RiwiStore.Domain.Entities;
 
-namespace RiwiStore.Data
+namespace RiwiStore.Domain.Data
 {
     public class BaseContext : DbContext
     {

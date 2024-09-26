@@ -1,10 +1,9 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using RiwiStore.Data;
-using RiwiStore.DTO;
-using RiwiStore.Model;
+using RiwiStore.Domain.Data;
+using RiwiStore.Domain.Entities;
 
-namespace RiwiStore.Services
+namespace RiwiStore.Infrastructure.Services
 {
     public class OrderService : IOrderService
     {

@@ -1,7 +1,8 @@
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
-using RiwiStore.DTO;
+using RiwiStore.API.DTOs;
+using RiwiStore.Util.Extensions;
 
 [ApiController]
 [Route("api/users")]

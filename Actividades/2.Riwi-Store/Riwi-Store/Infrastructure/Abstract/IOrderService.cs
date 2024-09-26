@@ -1,5 +1,4 @@
-using RiwiStore.DTO;
-using RiwiStore.Model;
+using RiwiStore.Domain.Entities;
 
 public interface IOrderService
 {
