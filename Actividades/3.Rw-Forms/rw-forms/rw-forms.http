@@ -1,0 +1,6 @@
+@rw_forms_HostAddress = http://localhost:5067
+
+GET {{rw_forms_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
