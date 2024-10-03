@@ -1,6 +1,5 @@
 using RWFormsApi.API.DTOs.Errors;
 using System.Net;
-using System.Text.Json;
 
 public class ExceptionMiddleware
 {
