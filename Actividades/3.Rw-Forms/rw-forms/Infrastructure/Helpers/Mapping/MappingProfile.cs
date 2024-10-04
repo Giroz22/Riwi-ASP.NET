@@ -10,5 +10,9 @@ class MappingProfile : Profile
         //User
         CreateMap<UserEntity, UserResponse>();
         CreateMap<UserRequest,UserEntity>();
+
+        //Form
+        CreateMap<FormEntity, FormResponse>();
+        CreateMap<FormRequest, FormEntity>();
     }
 }

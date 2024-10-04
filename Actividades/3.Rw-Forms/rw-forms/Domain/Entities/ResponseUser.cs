@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace RWFormsApi.Domain.Entities;
 
-public class FormResponse
+public class ResponseUser
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]

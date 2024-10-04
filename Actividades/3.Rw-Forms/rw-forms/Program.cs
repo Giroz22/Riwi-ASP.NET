@@ -29,6 +29,7 @@ builder.Services.AddScoped(sp=>
 
 //My Services
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IFormService, FormService>();
 
 //My controllers
 builder.Services.AddControllers();

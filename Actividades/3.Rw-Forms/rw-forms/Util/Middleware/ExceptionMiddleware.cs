@@ -41,6 +41,7 @@ public class ExceptionMiddleware
 
         if(errorResponse is ErrorsResponse errors) return context.Response.WriteAsJsonAsync(errors);
         
+        System.Console.WriteLine(exception);
         return context.Response.WriteAsJsonAsync(errorResponse);            
     }
 }
