@@ -9,6 +9,8 @@ public class FormEntity
     public string? Id { get; set; }
     public string Title{ get; set; } = "";
     public string Description{ get; set; } = "";
+    public FormStatus Status { get; set;} = FormStatus.Private;
+    public string UrlImage { get; set; } = "";
     public UserEntity User { get; set; } = new UserEntity();
     public IEnumerable<SectionEntity> Sections{ get; set; } = [];
 }
