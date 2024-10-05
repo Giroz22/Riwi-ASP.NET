@@ -12,7 +12,17 @@ class MappingProfile : Profile
         CreateMap<UserRequest,UserEntity>();
 
         //Form
-        CreateMap<FormEntity, FormResponse>();
+        CreateMap<FormEntity, FormResponse>()
+            .ForMember(dest => dest.Status, opt => opt.MapFrom(src=>src.Status.ToString()));
         CreateMap<FormRequest, FormEntity>();
+
+        //Section
+        CreateMap<SectionEntity, SectionResponse>();
+        CreateMap<SectionRequets, SectionEntity>();
+
+        //Question
+        CreateMap<QuestionEntity, QuestionResponse>()
+            .ForMember(dest=>dest.TypeQuestion, opc=>opc.MapFrom(src=>src.TypeQuestion.ToString()));
+        CreateMap<QuestionRequest, QuestionEntity>();
     }
 }

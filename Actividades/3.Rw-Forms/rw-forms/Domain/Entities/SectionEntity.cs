@@ -3,5 +3,5 @@ public class SectionEntity
 {
     public string Title { get; set; } = "";
     public string Description { get; set; } = "";
-    public ICollection<QuestionEntity> Questions { get; set; } = []; 
+    public ICollection<QuestionEntity> Questions { get; set; } = new List<QuestionEntity>(); 
 }

@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -12,5 +13,5 @@ public class FormEntity
     public FormStatus Status { get; set;} = FormStatus.Private;
     public string UrlImage { get; set; } = "";
     public UserEntity User { get; set; } = new UserEntity();
-    public IEnumerable<SectionEntity> Sections{ get; set; } = [];
+    public IEnumerable<SectionEntity> Sections{ get; set; } = new List<SectionEntity>();
 }

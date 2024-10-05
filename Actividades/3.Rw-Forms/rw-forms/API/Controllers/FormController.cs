@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using RWFormsApi.API.DTOs.Request;
 using RWFormsApi.API.DTOs.Response;
 using RWFormsApi.Domain.Entities;
 using RWFormsApi.Infrastructure.Abstract;
@@ -30,8 +31,8 @@ public class FormController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<FormResponse>> Create(FormRequest request)
     {
-        FormResponse response =  await _formService.Create(request);
-        return CreatedAtAction(nameof(FindById), new {id = response.Id}, _formService.Create(request));
+        FormResponse response = await _formService.Create(request);
+        return CreatedAtAction(nameof(FindById), new {id = response.Id}, await _formService.Create(request));
     }
 
     [HttpPut]
