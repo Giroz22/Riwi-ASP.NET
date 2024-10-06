@@ -22,7 +22,26 @@ class MappingProfile : Profile
 
         //Question
         CreateMap<QuestionEntity, QuestionResponse>()
-            .ForMember(dest=>dest.TypeQuestion, opc=>opc.MapFrom(src=>src.TypeQuestion.ToString()));
-        CreateMap<QuestionRequest, QuestionEntity>();
+            .ForMember(dest=>dest.TypeQuestion, opc=>opc.MapFrom(src=>src.TypeQuestion.ToString()))
+            .ForMember(dest=>dest.Answer, opc=>opc.MapFrom(src=>src.Answer));            
+        CreateMap<QuestionRequest, QuestionEntity>()
+            .ForMember(dest => dest.Answer, opc => opc.MapFrom( src => MapAnswer(src)));
+    }
+
+     // Método auxiliar fuera de la expresión para manejar la lógica compleja
+    private IAnswer MapAnswer(QuestionRequest src)
+    {
+        string nameClassAnswer = "RWFormsApi.Domain.Entities."+ src.TypeQuestion.ToString() + "AnswerEntity";
+
+        // Obtén el tipo con el nombre que buscas
+        Type type = Type.GetType(nameClassAnswer) ?? throw new Exception("\n Type not found \n");
+
+        // Crea una instancia del tipo
+        object obj = Activator.CreateInstance(type) ?? throw new Exception("\n Instance not found \n");
+
+        // Realiza el pattern-matching y llama al método correspondiente
+        if (obj is not IAnswer answer) throw new Exception("\n Type answer not found \n");
+        
+        return answer.CreateAnswer(src.Answer);
     }
 }

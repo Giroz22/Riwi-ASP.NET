@@ -1,8 +1,10 @@
 namespace RWFormsApi.Domain.Entities;
-class ShortAnswerEntity : IAnswer
+public class ShortAnswerEntity : IAnswer
 {
-    public ShortAnswerEntity() : base(string.Empty)
+    public string Answer { get; set; } = string.Empty;
+
+    public override IAnswer CreateAnswer(object? data)
     {
-        
+        return new ShortAnswerEntity { Answer = string.Empty };
     }
 }

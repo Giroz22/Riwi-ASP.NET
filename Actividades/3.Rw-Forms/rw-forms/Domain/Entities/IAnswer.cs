@@ -1,11 +1,10 @@
+using MongoDB.Bson.Serialization.Attributes;
+
 namespace RWFormsApi.Domain.Entities;
 
+[BsonDiscriminator(Required = true)]
+[BsonKnownTypes(typeof(ShortAnswerEntity), typeof(OptionsAnswerEntity))]
 public abstract class IAnswer
 {
-    public object Answer { get; set; }
-
-    public IAnswer(object answer)
-    {
-        Answer = answer;
-    }
+    public abstract IAnswer CreateAnswer(object data);
 }

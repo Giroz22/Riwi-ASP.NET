@@ -1,9 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RWFormsApi.API.DTOs.Request;
 using RWFormsApi.API.DTOs.Response;
-using RWFormsApi.Domain.Entities;
 using RWFormsApi.Infrastructure.Abstract;
-using RWFormsApi.Infrastructure.Services;
 
 [ApiController]
 [Route("api/Forms")]
@@ -32,7 +30,7 @@ public class FormController : ControllerBase
     public async Task<ActionResult<FormResponse>> Create(FormRequest request)
     {
         FormResponse response = await _formService.Create(request);
-        return CreatedAtAction(nameof(FindById), new {id = response.Id}, await _formService.Create(request));
+        return CreatedAtAction(nameof(FindById), new {id = response.Id}, response);
     }
 
     [HttpPut]

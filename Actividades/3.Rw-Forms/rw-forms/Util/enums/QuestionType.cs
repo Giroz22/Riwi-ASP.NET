@@ -1,6 +1,5 @@
 public enum QuestionType
 {
-    ShortAnswer,
-    Paragraph,
-    VariousOptions,   
+    Short,
+    Options,   
 }

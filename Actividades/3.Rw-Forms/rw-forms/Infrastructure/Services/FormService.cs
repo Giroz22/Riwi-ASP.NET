@@ -14,7 +14,6 @@ public class FormService : IFormService
     private readonly IMongoCollection<UserEntity> _UserCollection;
     private readonly IMapper _mapper;
     
-
     public FormService(IMongoDatabase database, IMapper mapper)
     {
         _formCollection = database.GetCollection<FormEntity>("Forms");
@@ -36,7 +35,7 @@ public class FormService : IFormService
      public async Task<FormResponse> Create(FormRequest request)
     {
         FormEntity form = _mapper.Map<FormEntity>(request);
-        form.User = await UserService.FindUser(_UserCollection, request.UserId);
+        form.User = await UserService.FindUser(_UserCollection, request.UserId);        
 
         await _formCollection.InsertOneAsync(form);
         return _mapper.Map<FormResponse>(form);
